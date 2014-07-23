@@ -108,6 +108,7 @@ drawLine(context, 1, 0);
 // draw pulsar lines
 for (index = 0; index < PULSARS.length; ++index) {
     PULSARS[index].drawLine(context);
+    PULSARS[index].drawPeriod(context);
 }
 
 // TODO: draw pulsar rot. period text
