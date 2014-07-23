@@ -53,7 +53,7 @@ Pulsar.prototype.drawLine = function(ctx){
   ctx.stroke();
 };
 Pulsar.prototype.setCoords = function(){
-    var cartesian = polar2cartesian(dir, dist);
+    var cartesian = polar2cartesian(this.angle, this.dist);
     this._x = EARTH.x + cartesian.mX*GALACTIC_CENTER.dist;
     this._y = EARTH.y + cartesian.mY*GALACTIC_CENTER.dist;
 }
