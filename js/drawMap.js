@@ -8,12 +8,12 @@ var YS = 800;
 
 var PAD = 20; // padding between canvas edge and drawing
 
-var GALACTIC_CENTER;
+var GALACTIC_CENTER ={};
 GALACTIC_CENTER.x = XS-PAD;
 GALACTIC_CENTER.y = YS/2;
 GALACTIC_CENTER.dist = GALACTIC_CENTER.x *2/3;  // TODO: determine this dynamically using pulsar distances
 
-var EARTH;
+var EARTH = {};
 EARTH.x = GALACTIC_CENTER.x - GALACTIC_CENTER.dist;
 EARTH.y = GALACTIC_CENTER.y;
 EARTH.r = 5; // radius of circle [px]
