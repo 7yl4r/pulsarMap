@@ -75,11 +75,13 @@ Pulsar.prototype.y = function(){
 };
 Pulsar.prototype.drawPeriod = function(ctx){
     ctx.save();
+    ctx.font="10px Courier";
+    var LINE_HEIGHT = 10;
     ctx.translate(this.x(), this.y());
     ctx.rotate(Math.PI * this.angle / 180);
     
     ctx.textAlign = 'left';
-    ctx.fillText(this.getPeriodBinary(), 0, lineHeight / 2);
+    ctx.fillText(this.getPeriodBinary(), 0, LINE_HEIGHT / 2);
     
     ctx.restore();  
 };
