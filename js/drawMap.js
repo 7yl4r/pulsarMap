@@ -74,14 +74,14 @@ Pulsar.prototype.y = function(){
     }
 };
 Pulsar.prototype.drawPeriod = function(ctx){
-    this.ctx.save();
-    this.ctx.translate(this.x(), this.y());
-    this.ctx.rotate(Math.PI * this.angle / 180);
+    ctx.save();
+    ctx.translate(this.x(), this.y());
+    ctx.rotate(Math.PI * this.angle / 180);
     
-    this.ctx.textAlign = 'left';
-    this.ctx.fillText(this.getPeriodBinary(), 0, lineHeight / 2);
+    ctx.textAlign = 'left';
+    ctx.fillText(this.getPeriodBinary(), 0, lineHeight / 2);
     
-    this.ctx.restore();  
+    ctx.restore();  
 };
 Pulsar.prototype.getPeriodBinary = function(){
     return '--||-|-||-|---|||-|-||--|||---'
