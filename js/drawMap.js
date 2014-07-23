@@ -34,7 +34,7 @@ var drawLine = function(ctx, dist, dir){
   // draws a line from Earth given number of degrees from the galactic center(right) of length dist given as percent of galactic distance
   ctx.moveTo(EARTH.x, EARTH.y);
   var cartesian = polar2cartesian(dir, dist);
-  ctx.lineTo(cartesian.mX, cartesian.mY)
+  ctx.lineTo(cartesian.mX*GALACTIC_CENTER.dist, cartesian.mY*GALACTIC_CENTER.dist)
   ctx.stroke();
 };
 
