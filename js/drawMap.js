@@ -67,7 +67,7 @@ var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17, 1178486506),
               new Pulsar('J1645-0317', .04, 0, -16, 550675372)];
 
 // draw line to galactic center
-drawLine(context, GALACTIC_CENTER.dist, 0);
+drawLine(context, 1, 0);
               
 // draw pulsar lines
 for (index = 0; index < PULSARS.length; ++index) {
