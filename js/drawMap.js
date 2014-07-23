@@ -83,7 +83,7 @@ Pulsar.prototype.drawPeriod = function(ctx){
     
     this.context.restore();  
 };
-Pulsar.prototype.getPeriodBinary(){
+Pulsar.prototype.getPeriodBinary = function(){
     return '--||-|-||-|---|||-|-||--|||---'
 };
 
