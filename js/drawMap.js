@@ -63,7 +63,7 @@ var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17, 1178486506),
               new Pulsar('J2018+2839', .03, 0, 68, 792520205),
               new Pulsar('J1935+1616', .40, 0, 52, 509549854),
               new Pulsar('J1932+1059', .01, 0, 45, 321746104),
-              new Pulsar('J1645-0317', .04, 0, 16, 550675372];
+              new Pulsar('J1645-0317', .04, 0, 16, 550675372)];
               
 // draw pulsar lines
 for (index = 0; index < PULSARS.length; ++index) {
