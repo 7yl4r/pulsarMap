@@ -55,7 +55,7 @@ Pulsar.prototype.drawLine = function(ctx){
 Pulsar.prototype.setCoords = function(){
     var cartesian = polar2cartesian(dir, dist);
     this._x = EARTH.x + cartesian.mX*GALACTIC_CENTER.dist;
-    this._y = EARTH.y + cartesian.mY*GALACTIC_CENTER.dist);
+    this._y = EARTH.y + cartesian.mY*GALACTIC_CENTER.dist;
 }
 Pulsar.prototype.x = function(){
     if (this._x){
