@@ -48,7 +48,43 @@ function Pulsar(name, dist, z, angle, period){
   this.period=period;  // rotational period (in H-transition units)
 }
 Pulsar.prototype.drawLine = function(ctx){
-  drawLine(ctx, this.dist, this.angle)
+  ctx.moveTo(EARTH.x, EARTH.y);
+  ctx.lineTo(this.x(), this.y());
+  ctx.stroke();
+};
+Pulsar.prototype.setCoords = function(){
+    var cartesian = polar2cartesian(dir, dist);
+    this._x = EARTH.x + cartesian.mX*GALACTIC_CENTER.dist;
+    this._y = EARTH.y + cartesian.mY*GALACTIC_CENTER.dist);
+}
+Pulsar.prototype.x = function(){
+    if (this._x){
+        return this._x;
+    } else {
+        this.setCoords();
+        return this._x;
+    }
+};
+Pulsar.prototype.y = function(){
+    if (this._y){
+        return this._y;
+    } else {
+        this.setCoords();
+        return this._y;
+    }
+};
+Pulsar.prototype.drawPeriod = function(ctx){
+    this.context.save();
+    this.context.translate(this.x(), this.y());
+    this.context.rotate(Math.PI * this.angle / 180);
+    
+    this.context.textAlign = 'left';
+    this.context.fillText(this.getPeriodBinary(), 0, lineHeight / 2);
+    
+    this.context.restore();  
+};
+Pulsar.prototype.getPeriodBinary(){
+    return '--||-|-||-|---|||-|-||--|||---'
 };
 
 var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17, 1178486506),
