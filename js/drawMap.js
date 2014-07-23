@@ -3,8 +3,8 @@ var a_canvas = document.getElementById("a");
 var context = a_canvas.getContext("2d");
 
 // size of canvas TODO: set by getting canvas attributes
-var XS = 800;
-var YS = 800;
+var XS = 1100;
+var YS = 500;
 
 var PAD = 20; // padding between canvas edge and drawing
 
