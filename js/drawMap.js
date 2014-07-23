@@ -50,9 +50,9 @@ Pulsar.prototype.drawLine = function(ctx){
   drawLine(ctx, this.dist, this.angle)
 };
 
-var PULSARS =[Pulsar('J1731-4744', 27, 0, 17, 1178486506),
-              Pulsar('J1456-6843',  2, 0, 49, 374101871),
-              Pulsar('J1243-6423', 56, 0, 58, 551117432)];
+var PULSARS =[new Pulsar('J1731-4744', 27, 0, 17, 1178486506),
+              new Pulsar('J1456-6843',  2, 0, 49, 374101871),
+              new Pulsar('J1243-6423', 56, 0, 58, 551117432)];
               
 // draw pulsar lines
 for (index = 0; index < PULSARS.length; ++index) {
