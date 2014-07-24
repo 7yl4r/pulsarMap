@@ -92,7 +92,7 @@ Pulsar.prototype.tweakBinaryPosition = function(ctx){
     if (this.y() + 2*PAD > YS || 
         this.y() - 2*PAD < 0 ||
         this.x() - 2*PAD < 0 ){
-        ctx.translate(-2*PAD, 10);
+        ctx.translate(-4*PAD, 10);
     } else {
         return;
     }
