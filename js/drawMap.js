@@ -95,7 +95,9 @@ Pulsar.prototype.tweakBinaryPosition = function(ctx){
     if (this.y() + 2*PAD > YS || 
         this.y() - 2*PAD < 0 ||
         this.x() - 2*PAD < 0 ){
+        ctx.save();
         ctx.translate(-4*PAD, 10);
+        ctx.restore();
     } else {
         return;
     }
@@ -123,8 +125,10 @@ var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17,   1178486506),
  
 // draw line to galactic center
 drawLine(context, 1, 0);
+context.save();
 context.translate(GALACTIC_CENTER.x, GALACTIC_CENTER.y);
 context.fillText('|', 0, LINE_HEIGHT / 2);
+context.restore();
               
 // draw pulsar lines
 for (index = 0; index < PULSARS.length; ++index) {
