@@ -7,12 +7,12 @@
     </head>
     <body onload="drawMap('original')">
         <div id='buttons'>
-            <input type="radio" id="original" name="mapType" value="orig" onclick="drawMap('original')" checked="checked">
+            <input type="radio" id="original" name="mapType" value="orig" onclick="drawMap('original')">
                <label for="original">Voyager/Pioneer Map</label>
             <input type="radio" id="7yl4r" name="mapType" value="custom" onclick="drawMap('custom')">
                <label for="original">Custom</label>
         </div>
-        <canvas id="a" width="1200" height="800">
+        <canvas id="pulsar_map" width="1200" height="800">
             Your browser does not support HTML5 Canvas? =(
         </canvas>
         <script type='text/javascript' src='js/drawMap.js'></script>
