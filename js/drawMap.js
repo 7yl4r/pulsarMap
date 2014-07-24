@@ -98,7 +98,8 @@ Pulsar.prototype.tweakBinaryPosition = function(ctx){
     }
 };
 Pulsar.prototype.getPeriodBinary = function(){ 
-    this.period.binary = this.period.toString(2).replace('0','-').replace('1','|');
+    this.period.binary = this.period.toString(2);
+    this.period.bin    = this.period.binary.replace('0','-').replace('1','|');
     return this.period.binary;
 };
 
