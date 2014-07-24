@@ -9,12 +9,20 @@
         <div id='buttons'>
             <input type="radio" id="original" name="mapType" value="orig" onclick="drawMap('original')">
                <label for="original">Voyager/Pioneer Map</label>
+            <input type="radio" id="7yl4r" name="mapType" value="1989" onclick="drawMap('1989')">
+               <label for="7yl4r">1989 (from modern data)</label>
             <input type="radio" id="7yl4r" name="mapType" value="custom" onclick="drawMap('custom')">
-               <label for="7yl4r">Custom</label>
+               <label for="7yl4r">1989 custom</label>
         </div>
+        
         <canvas id="pulsar_map" width="1200" height="800">
             Your browser does not support HTML5 Canvas? =(
         </canvas>
+        
+        <div id='data'>
+            pulsar data should show here...
+        </div>
+        
         <script type='text/javascript' src='js/drawMap.js'></script>
     </body>
 </html>
