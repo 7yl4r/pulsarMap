@@ -6,6 +6,16 @@
         <link rel='stylesheet' type='text/css' href='css/radioButtons.css'/>
     </head>
     <body onload="drawMap('original')">
+        <!-- facbook javascript SDK-->
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/fb_LT/sdk.js#xfbml=1&appId=533629643408777&version=v2.0";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    
         <div id='buttons'>
             <input type="radio" id="original" name="mapType" value="orig" onclick="drawMap('original')">
                <label for="original">Voyager/Pioneer Map</label>
@@ -23,6 +33,34 @@
             pulsar data should show here...
         </div>
         
+        <br>
+        <br>
+
+        <div id='about'>
+            created by Tylar Murray. 
+            <!-- Place this tag where you want the share button to render. -->
+            <div id='g-plus-button' class="g-plus" data-action="share"></div>
+            <div id='reddit-button'>
+                <a href="http://www.reddit.com/submit" onclick="window.location = 'http://www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="http://www.reddit.com/static/spreddit7.gif" alt="submit to reddit" border="0" /> </a>
+            </div>
+            <div id='twitter-button'>
+                <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a>
+            </div>
+            <div id='fb-button' class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/"></div>
+        </div>
+        
         <script type='text/javascript' src='js/drawMap.js'></script>
+        
+        <!-- g+ share button script -->
+        <script type="text/javascript">
+          (function() {
+            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+            po.src = 'https://apis.google.com/js/platform.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+          })();
+        </script>
+        <!-- twitter button script -->
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
     </body>
 </html>
