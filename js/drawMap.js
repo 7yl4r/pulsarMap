@@ -16,11 +16,14 @@ GALACTIC_CENTER.dist = GALACTIC_CENTER.x *2/3;  // TODO: determine this dynamica
 var EARTH = {};
 EARTH.x = GALACTIC_CENTER.x - GALACTIC_CENTER.dist;
 EARTH.y = GALACTIC_CENTER.y;
-EARTH.r = 5; // radius of circle [px]
+EARTH.r = 2; // radius of circle [px]
 
 // Draw the center point
 context.fillStyle = "black";
+
 context.strokeStyle = "black";
+context.lineWidth = 1;
+
 context.font="10px Courier";
 var LINE_HEIGHT = 10;
 context.textAlign = 'left';
@@ -127,7 +130,7 @@ var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17,   1178486506),
 drawLine(context, 1, 0);
 context.save();
 context.translate(GALACTIC_CENTER.x, GALACTIC_CENTER.y);
-context.fillText('|', 0, LINE_HEIGHT / 2);
+context.fillText('|', -3, LINE_HEIGHT / 2 - 3);
 context.restore();
               
 // draw pulsar lines
