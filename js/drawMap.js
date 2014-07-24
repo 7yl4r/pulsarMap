@@ -38,8 +38,9 @@ context.strokeStyle = "black";
 context.lineWidth = 0.2;
 
 context.font="10px Courier";
-var LINE_HEIGHT = 12;  // height of a text line
-var X_SHIFT = 5;  // amount to move before drawing text
+var LINE_HEIGHT = 10;  // height of a text line
+var Y_SHIFT = -2;  //amount to move up before drawing text
+var X_SHIFT = 5;  // amount to move right before drawing text
 context.textAlign = 'left';
 
 function drawMap(type){
@@ -91,7 +92,7 @@ function drawMap(type){
     drawLine(context, 1, 0);
     context.save();
     context.translate(GALACTIC_CENTER.x, GALACTIC_CENTER.y);
-    context.fillText('|', -3, LINE_HEIGHT / 2 );
+    context.fillText('|', -3, LINE_HEIGHT / 2 + Y_SHIFT );
     context.restore();
                   
     // draw pulsar lines
@@ -164,7 +165,7 @@ Pulsar.prototype.drawPeriod = function(ctx){
     
     this.tweakBinaryPosition(ctx);
     
-    ctx.fillText(this.getPeriodBinary(), X_SHIFT, LINE_HEIGHT / 2);
+    ctx.fillText(this.getPeriodBinary(), X_SHIFT, LINE_HEIGHT / 2 + Y_SHIFT);
     
     ctx.restore();  
 };
