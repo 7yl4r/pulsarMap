@@ -20,6 +20,12 @@ EARTH.r = 5; // radius of circle [px]
 
 // Draw the center point
 context.fillStyle = "black";
+context.strokeStyle = "black";
+context.font="10px Courier";
+var LINE_HEIGHT = 10;
+context.textAlign = 'left';
+
+
 context.beginPath();
 context.arc(EARTH.x, EARTH.y, EARTH.r, 0, 2*Math.PI);
 context.closePath();
@@ -75,14 +81,11 @@ Pulsar.prototype.y = function(){
 };
 Pulsar.prototype.drawPeriod = function(ctx){
     ctx.save();
-    ctx.font="10px Courier";
-    var LINE_HEIGHT = 10;
     ctx.translate(this.x(), this.y());
     ctx.rotate(Math.PI * this.angle / 180);
     
     this.tweakBinaryPosition(ctx);
     
-    ctx.textAlign = 'left';
     ctx.fillText(this.getPeriodBinary(), 0, LINE_HEIGHT / 2);
     
     ctx.restore();  
@@ -120,6 +123,8 @@ var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17,   1178486506),
  
 // draw line to galactic center
 drawLine(context, 1, 0);
+context.moveTo(GALACTIC_CENTER.x, GALACTIC_CENTER.y);
+context.fillText('|', 0, LINE_HEIGHT / 2);
               
 // draw pulsar lines
 for (index = 0; index < PULSARS.length; ++index) {
