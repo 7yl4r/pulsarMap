@@ -24,7 +24,7 @@ function makeDataTable(){
     var TABLE_FOOT = '</table>';
     var html = TABLE_HEAD;
     for (index = 0; index < PULSARS.length; ++index) {
-        html += PULSARS[0].getTableRow();
+        html += PULSARS[index].getTableRow();
     }
     html += TABLE_FOOT;
     dataTable.innerHTML = html;
