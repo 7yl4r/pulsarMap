@@ -22,11 +22,12 @@ document.getElementById('original').checked = true;  // because drawMape('origin
 function makeDataTable(){
     var TABLE_HEAD = 'PULSARS USED: <br> <table> <tr> <td>name</td> <td>distance [ratio of A* distance]</td> <td>z-coord [ratio of A* distance]</td> <td>degrees from A*</td> <td>period [H-transitions]</td></tr>';
     var TABLE_FOOT = '</table>';
-    dataTable.innerHTML = TABLE_HEAD;
+    var html = TABLE_HEAD;
     for (index = 0; index < PULSARS.length; ++index) {
-        dataTable.innerHTML += PULSARS[0].getTableRow();
+        html += PULSARS[0].getTableRow();
     }
-    dataTable.innerHTML += TABLE_FOOT;
+    html += TABLE_FOOT;
+    dataTable.innerHTML = html;
 }
 
 // Draw the center point
