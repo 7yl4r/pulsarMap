@@ -22,10 +22,11 @@ EARTH.r = 2; // radius of circle [px]
 context.fillStyle = "black";
 
 context.strokeStyle = "black";
-context.lineWidth = 0.5;
+context.lineWidth = 0.2;
 
 context.font="10px Courier";
-var LINE_HEIGHT = 10;
+var LINE_HEIGHT = 12;  // height of a text line
+var X_SHIFT = 5;  // amount to move before drawing text
 context.textAlign = 'left';
 
 
@@ -89,7 +90,7 @@ Pulsar.prototype.drawPeriod = function(ctx){
     
     this.tweakBinaryPosition(ctx);
     
-    ctx.fillText(this.getPeriodBinary(), 0, LINE_HEIGHT / 2);
+    ctx.fillText(this.getPeriodBinary(), X_SHIFT, LINE_HEIGHT / 2);
     
     ctx.restore();  
 };
@@ -98,9 +99,7 @@ Pulsar.prototype.tweakBinaryPosition = function(ctx){
     if (this.y() + 2*PAD > YS || 
         this.y() - 2*PAD < 0 ||
         this.x() - 2*PAD < 0 ){
-        ctx.save();
         ctx.translate(-4*PAD, 10);
-        ctx.restore();
     } else {
         return;
     }
@@ -130,7 +129,7 @@ var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17,   1178486506),
 drawLine(context, 1, 0);
 context.save();
 context.translate(GALACTIC_CENTER.x, GALACTIC_CENTER.y);
-context.fillText('|', -3, LINE_HEIGHT / 2 - 2);
+context.fillText('|', -3, LINE_HEIGHT / 2 );
 context.restore();
               
 // draw pulsar lines
