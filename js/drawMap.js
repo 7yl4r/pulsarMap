@@ -1,5 +1,7 @@
 // Set up!
 var canvas = document.getElementById("pulsar_map");
+var dataTable = document.getElementById('data');
+
 var context = canvas.getContext("2d");
 
 var PAD = 50; // padding between canvas edge and drawing
@@ -14,22 +16,18 @@ EARTH.x = GALACTIC_CENTER.x - GALACTIC_CENTER.dist;
 EARTH.y = GALACTIC_CENTER.y;
 EARTH.r = 2; // radius of circle [px]
 
-var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17,   1178486506),
-              new Pulsar('J1456-6843', .02, 0, -49,  374101871),
-              new Pulsar('J1243-6423', .56, 0, 58,   551117432),
-              new Pulsar('J0835-4510', .15, 0, 95,  126726823),
-              new Pulsar('J0953+0755', .01, 0, 129,  359455043),
-              new Pulsar('J0826+2637', .02,	0, 162,  753751947),
-              new Pulsar('J0534+2200', .18, 0, 174,  47057538),
-              new Pulsar('J0528+2200', .11, 0, 177,  5320116676),
-              new Pulsar('J0332+5434', .07, 0, -145, 1014906390),
-              new Pulsar('J2219+4754', .10, 0, -97,  764842161),
-              new Pulsar('J2018+2839', .03, 0, -68,  792520205),
-              new Pulsar('J1935+1616', .40, 0, -52,  509549854),
-              new Pulsar('J1932+1059', .01, 0, 45,   321746104),
-              new Pulsar('J1645-0317', .04, 0, -16,  550675372)];
-document.getElementById('original').checked = true;
+var PULSARS =[];
+document.getElementById('original').checked = true;  // because drawMape('original') is called in onload
 
+function makeDataTable(){
+    var TABLE_HEAD = 'PULSARS USED: <br> <table> <tr> <td>name</td> <td>distance [ratio of A* distance]</td> <td>z-coord [ratio of A* distance]</td> <td>degrees from A*</td> <td>period [H-transitions]</td></tr>';
+    var TABLE_FOOT = '</table>';
+    dataTable.innerHTML = TABLE_HEAD;
+    for (index = 0; index < PULSARS.length; ++index) {
+        dataTable.innerHTML += PULSARS[0].getTableRow();
+    }
+    dataTable.innerHTML += TABLE_FOOT;
+}
 
 // Draw the center point
 context.fillStyle = "black";
@@ -96,6 +94,8 @@ function drawMap(type){
     } else {
         console.log('unknon map type "'+type+'"');
     }
+    makeDataTable();
+    
     // Use the identity matrix to reset transforms
     context.setTransform(1, 0, 0, 1, 0, 0);
     // clear the canvas
@@ -201,4 +201,8 @@ Pulsar.prototype.getPeriodBinary = function(){
     this.binary = this.period.toString(2);
     this.bin    = this.binary.replace(/0/g, '-').replace(/1/g, '|');
     return this.bin;
+};
+Pulsar.prototype.getTableRow = function(){
+    var sep = '</td><td>'
+    return '<tr><td>'+this.name.toString()+sep+this.dist.toString()+sep+this.z.toString()+sep+this.angle+sep+this.period+'</td></tr>';
 };
