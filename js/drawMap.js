@@ -130,7 +130,7 @@ var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17,   1178486506),
 drawLine(context, 1, 0);
 context.save();
 context.translate(GALACTIC_CENTER.x, GALACTIC_CENTER.y);
-context.fillText('|', -3, LINE_HEIGHT / 2 - 3);
+context.fillText('|', -3, LINE_HEIGHT / 2 - 2);
 context.restore();
               
 // draw pulsar lines
