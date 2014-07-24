@@ -3,10 +3,10 @@ var a_canvas = document.getElementById("a");
 var context = a_canvas.getContext("2d");
 
 // size of canvas TODO: set by getting canvas attributes
-var XS = 1100;
-var YS = 600;
+var XS = 1200;
+var YS = 800;
 
-var PAD = 20; // padding between canvas edge and drawing
+var PAD = 50; // padding between canvas edge and drawing
 
 var GALACTIC_CENTER ={};
 GALACTIC_CENTER.x = XS-PAD;
