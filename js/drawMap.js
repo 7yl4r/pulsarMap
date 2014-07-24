@@ -1,5 +1,5 @@
 // Set up!
-var canvas = document.getElementById("a");
+var canvas = document.getElementById("pulsar_map");
 var context = canvas.getContext("2d");
 
 var PAD = 50; // padding between canvas edge and drawing
@@ -28,6 +28,8 @@ var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17,   1178486506),
               new Pulsar('J1935+1616', .40, 0, -52,  509549854),
               new Pulsar('J1932+1059', .01, 0, 45,   321746104),
               new Pulsar('J1645-0317', .04, 0, -16,  550675372)];
+document.getElementById('original').checked = true;
+
 
 // Draw the center point
 context.fillStyle = "black";
