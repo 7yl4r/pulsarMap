@@ -80,13 +80,26 @@ Pulsar.prototype.drawPeriod = function(ctx){
     ctx.translate(this.x(), this.y());
     ctx.rotate(Math.PI * this.angle / 180);
     
+    this.tweakBinaryPosition(ctx);
+    
     ctx.textAlign = 'left';
     ctx.fillText(this.getPeriodBinary(), 0, LINE_HEIGHT / 2);
     
     ctx.restore();  
 };
-Pulsar.prototype.getPeriodBinary = function(){
-    return '--||-|-||-|---|||-|-||--|||---'
+Pulsar.prototype.tweakBinaryPosition(ctx){
+    // moves the location of the given context from the line endpoint to the point where the binary should be drawn
+    if (this.y() + 2*PAD > YS || 
+        this.y() - 2*PAD < 0 ||
+        this.x() - 2*PAD < 0 ){
+        ctx.translate(-2*PAD, 10);
+    } else {
+        return;
+    }
+};
+Pulsar.prototype.getPeriodBinary = function(){ 
+    this.period.binary = this.period.toString(2).replace('0','-').replace('1','|');
+    return this.period.binary;
 };
 
 var PULSARS =[new Pulsar('J1731-4744', .27, 0, 17, 1178486506),
