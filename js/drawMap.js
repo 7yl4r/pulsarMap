@@ -87,7 +87,7 @@ Pulsar.prototype.drawPeriod = function(ctx){
     
     ctx.restore();  
 };
-Pulsar.prototype.tweakBinaryPosition(ctx){
+Pulsar.prototype.tweakBinaryPosition = function(ctx){
     // moves the location of the given context from the line endpoint to the point where the binary should be drawn
     if (this.y() + 2*PAD > YS || 
         this.y() - 2*PAD < 0 ||
