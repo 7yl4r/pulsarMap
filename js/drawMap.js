@@ -60,7 +60,7 @@ function drawMap(type){
                   new Pulsar('J1935+1616', .40, 0, -52,  509549854),
                   new Pulsar('J1932+1059', .01, 0, 45,   321746104),
                   new Pulsar('J1645-0317', .04, 0, -16,  550675372)];
-    } else if (type == 'custom'){
+    } else if (type == '1989'){
         PULSARS =[new Pulsar('J1731-4744', 0.6539219551,  0, 18.15548387,   1178693580),
                   new Pulsar('J1456-6843', 0.0590855341,  0, -47.68774194,  374101942.8),
                   new Pulsar('J1243-6423', 1.509657075,   0, 57.97677419,   551800534.7),
@@ -74,7 +74,25 @@ function drawMap(type){
                   new Pulsar('J2018+2839', 0.1273551439,  0, -68.09290323,  792520332.8),
                   new Pulsar('J1935+1616', 0.5974247799,  0, -52.27290323,  509554102),
                   new Pulsar('J1932+1059', 0.04727368283, 0, 46.4516129,   321746951.7),
-                  new Pulsar('J1645-0317', 0.3820785705,  0, -23.78064516,  550676677)];        
+                  new Pulsar('J1645-0317', 0.3820785705,  0, -23.78064516,  550676677)];
+    } else if (type == 'custom'){
+        PULSARS =[new Pulsar('J1731-4744', 0.6539219551,  0, 18.15548387,   1178693580),
+                  new Pulsar('J1456-6843', 0.0590855341,  0, -47.68774194,  374101942.8),
+
+                  new Pulsar('J0835-4510', 0.03807646827, 0, 95.83612903,  126882551.9),
+                  new Pulsar('J0953+0755', 0.03413480489, 0, 122.8277419,  359455215.9),
+                  new Pulsar('J0826+2637', 0.04727368283, 0, 151.803871,  753753243),
+                  new Pulsar('J0534+2200', 0.26264617,    0, 173.2103226,  46993720.94),
+
+                  new Pulsar('J0332+5434', 0.1391407174,  0, -144.9883871, 1014907891),
+                  new Pulsar('J2219+4754', 0.321639732,   0, -97.76064516,  764844211.8),
+                  new Pulsar('J2018+2839', 0.1273551439,  0, -68.09290323,  792520332.8),
+                  new Pulsar('J1935+1616', 0.5974247799,  0, -52.27290323,  509554102),
+                  new Pulsar('J1932+1059', 0.04727368283, 0, 46.4516129,   321746951.7),
+                  new Pulsar('J1645-0317', 0.3820785705,  0, -23.78064516,  550676677)];
+                  
+                //  new Pulsar('J1856-3754', 0.03944,       0, ),
+                //  new Pulsar('B1822-09', )]; 
     } else {
         console.log('unknon map type "'+type+'"');
     }
@@ -171,10 +189,10 @@ Pulsar.prototype.drawPeriod = function(ctx){
 };
 Pulsar.prototype.tweakBinaryPosition = function(ctx){
     // moves the location of the given context from the line endpoint to the point where the binary should be drawn
-    if (this.y() + 2*PAD > canvas.height || 
-        this.y() - 2*PAD < 0 ||
-        this.x() - 2*PAD < 0 ){
-        ctx.translate(-4*PAD, 10);
+    if (this.y() + 3*PAD > canvas.height || 
+        this.y() - 3*PAD < 0 ||
+        this.x() - 3*PAD < 0 ){
+        ctx.translate(-4*PAD, -9);
     } else {
         return;
     }
