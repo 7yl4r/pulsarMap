@@ -137,16 +137,20 @@ function pulsarSet( type ){
         $("#customize").show();
         $("#data").hide();
         this.list = [];
-        this.loadPulsarFile();
+        this.loadPulsarFile(function(){
+            this.makeDataTable();
+        });
     } else if (type == 'all'){
         // shows all known pulsars in the db (hold on to your butts)
         console.log('using all pulsars in the set... Hold on to your butts.');
         $('#customize').hide();
         $('#data').prepend('Loading alotta data... Hold on to your butts.<br><br>')
         $('#data').show();
-        PULSARS.loadPulsarFile();
-        PULSARS.list = PULSARS.allPulsars;
-        PULSARS.makeDataTable();
+        this.loadPulsarFile(function(){
+            this.list = this.allPulsars;
+            this.makeDataTable();
+        });
+        
     } else {
         console.log('unknown pulsar set "'+type.toString()+'". empty pulsar set created.');
         this.list = [];
@@ -162,10 +166,10 @@ pulsarSet.prototype.makeDataTable = function(){
     html += TABLE_FOOT;
     dataTable.innerHTML = html;
 };
-pulsarSet.prototype.loadPulsarFile = function(){
-    // loads up the pulsar list file and makes the options table
+pulsarSet.prototype.loadPulsarFile = function(callback){
+    // loads up the pulsar list file and then runs callback
     if (this.allPulsars){
-        this.makePulsarOptionsTable();
+        callback();
         return;
     } else {
         var allList = [];  // store this for access inside callback
@@ -186,7 +190,7 @@ pulsarSet.prototype.loadPulsarFile = function(){
             }
             // NOTE: had to reference this as a global because the ajax call 
             PULSARS.allPulsars = allList;
-            PULSARS.makePulsarOptionsTable();
+            callback();
         });
     }
 };
