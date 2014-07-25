@@ -56,12 +56,11 @@ function drawMap(type){
     context.fillText('|', -3, LINE_HEIGHT / 2 + Y_SHIFT );
     context.restore();
     
-    if(!PULSARS.list.length){  // the really bad way to ensure pulsars are loaded before continuing...
+    while (!PULSARS.list.length){  // the really bad way to ensure pulsars are loaded before continuing...
         console.log('pulsars list not yet ready, waiting 1000ms...');
-        setTimeout(PULSARS.drawPulsars(context), 1000);
-    } else {
-        PULSARS.drawPulsars(context), 1000);
     }
+    PULSARS.drawPulsars(context), 1000);
+
 }
 
 function polar2cartesian(deg, r) {
@@ -142,7 +141,7 @@ function pulsarSet( type ){
         $("#data").hide();
         this.list = [];
         this.loadPulsarFile(function(){
-            this.makeDataTable();
+            PULSARS.makeDataTable();
         });
     } else if (type == 'all'){
         // shows all known pulsars in the db (hold on to your butts)
