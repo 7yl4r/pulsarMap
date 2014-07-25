@@ -56,9 +56,6 @@ function drawMap(type){
     context.fillText('|', -3, LINE_HEIGHT / 2 + Y_SHIFT );
     context.restore();
     
-    while (!PULSARS.list.length){  // the really bad way to ensure pulsars are loaded before continuing...
-        console.log('pulsars list not yet ready, waiting 1000ms...');
-    }
     PULSARS.drawPulsars(context);
 
 }
