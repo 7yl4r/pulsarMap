@@ -55,7 +55,11 @@ function drawMap(type){
     context.translate(GALACTIC_CENTER.x, GALACTIC_CENTER.y);
     context.fillText('|', -3, LINE_HEIGHT / 2 + Y_SHIFT );
     context.restore();
-                  
+    
+    while(!PULSARS.list){  // the really bad way to ensure pulsars are loaded before continuing...
+        setTimeout(PULSARS.drawPulsars(context), 1000);
+    }
+    
     PULSARS.drawPulsars(context);
     
 }
