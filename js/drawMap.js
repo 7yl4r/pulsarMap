@@ -160,7 +160,7 @@ pulsarSet.prototype.loadPulsarFile = function(){
         return;
     } else {
         var allList = [];  // store this for access inside callback
-        $.get('/pulsarMap/pulsarTable.csv', function(dat) {
+        $.get('/pulsarTable.csv', function(dat) {
             var data = $.csv.toArrays(dat);
             for(var row in data) {
                 var gal_x = data[row][11];
