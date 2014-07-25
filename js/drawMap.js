@@ -59,7 +59,7 @@ function drawMap(type){
     while (!PULSARS.list.length){  // the really bad way to ensure pulsars are loaded before continuing...
         console.log('pulsars list not yet ready, waiting 1000ms...');
     }
-    PULSARS.drawPulsars(context), 1000);
+    PULSARS.drawPulsars(context);
 
 }
 
