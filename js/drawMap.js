@@ -147,8 +147,8 @@ function pulsarSet( type ){
         $('#data').prepend('Loading alotta data... Hold on to your butts.<br><br>')
         $('#data').show();
         this.loadPulsarFile(function(){
-            this.list = this.allPulsars;
-            this.makeDataTable();
+            PULSARS.list = PULSARS.allPulsars;
+            PULSARS.makeDataTable();
         });
         
     } else {
