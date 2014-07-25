@@ -56,12 +56,12 @@ function drawMap(type){
     context.fillText('|', -3, LINE_HEIGHT / 2 + Y_SHIFT );
     context.restore();
     
-    while(!PULSARS.list){  // the really bad way to ensure pulsars are loaded before continuing...
+    if(!PULSARS.list.length){  // the really bad way to ensure pulsars are loaded before continuing...
         console.log('pulsars list not yet ready, waiting 1000ms...');
+        setTimeout(PULSARS.drawPulsars(context), 1000);
+    } else {
+        PULSARS.drawPulsars(context), 1000);
     }
-    
-    PULSARS.drawPulsars(context);
-    
 }
 
 function polar2cartesian(deg, r) {
