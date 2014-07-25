@@ -298,5 +298,3 @@ Pulsar.prototype.draw = function( ctx ){
     this.drawPeriod(ctx);
     // TODO: draw z-axis marker
 };
-
-f
