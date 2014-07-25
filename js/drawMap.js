@@ -138,6 +138,15 @@ function pulsarSet( type ){
         $("#data").hide();
         this.list = [];
         this.loadPulsarFile();
+    } else if (type == 'all'){
+        // shows all known pulsars in the db (hold on to your butts)
+        console.log('using all pulsars in the set... Hold on to your butts.');
+        $('#customize').hide();
+        $('#data').prepend('Loading alotta data... Hold on to your butts.<br><br>')
+        $('#data').show();
+        this.loadPulsarFile();
+        this.list = this.allPulsars;
+        this.makeDataTable();
     } else {
         console.log('unknown pulsar set "'+type.toString()+'". empty pulsar set created.');
         this.list = [];
