@@ -57,7 +57,7 @@ function drawMap(type){
     context.restore();
     
     while(!PULSARS.list){  // the really bad way to ensure pulsars are loaded before continuing...
-        setTimeout(PULSARS.drawPulsars(context), 1000);
+        console.log('pulsars list not yet ready, waiting 1000ms...');
     }
     
     PULSARS.drawPulsars(context);
