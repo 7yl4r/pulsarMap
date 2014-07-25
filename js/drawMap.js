@@ -144,9 +144,9 @@ function pulsarSet( type ){
         $('#customize').hide();
         $('#data').prepend('Loading alotta data... Hold on to your butts.<br><br>')
         $('#data').show();
-        this.loadPulsarFile();
-        this.list = this.allPulsars;
-        this.makeDataTable();
+        PULSARS.loadPulsarFile();
+        PULSARS.list = PULSARS.allPulsars;
+        PULSARS.makeDataTable();
     } else {
         console.log('unknown pulsar set "'+type.toString()+'". empty pulsar set created.');
         this.list = [];
