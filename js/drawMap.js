@@ -21,7 +21,7 @@ EARTH.y = GALACTIC_CENTER.y;
 EARTH.r = 2; // radius of circle [px]
 
 var PULSARS = pulsarSet('empty');
-document.getElementById('original').checked = true;  // because drawMape('original') is called in onload
+document.getElementById('original').checked = true;  // because drawMap ('original') is called in onload
 
 // Draw the center point
 context.fillStyle = "black";
@@ -139,6 +139,7 @@ function pulsarSet( type ){
         this.list = [];
         this.loadPulsarFile(function(){
             PULSARS.makeDataTable();
+            PULSARS.makePulsarOptionsTable();
         });
     } else if (type == 'all'){
         // shows all known pulsars in the db (hold on to your butts)
@@ -147,8 +148,8 @@ function pulsarSet( type ){
         $('#data').prepend('Loading alotta data... Hold on to your butts.<br><br>')
         $('#data').show();
         this.loadPulsarFile(function(){
-            PULSARS.list = PULSARS.allPulsars;
             PULSARS.makeDataTable();
+            PULSARS.list = PULSARS.allPulsars;
         });
         
     } else {
