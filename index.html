@@ -110,6 +110,24 @@
         <script>
             vex.defaultOptions.className = 'vex-theme-os';
 
+            function showGalleryModal(){
+                window.modal = vex.open({
+                    content:'<div>' +
+                            '  custom maps rendered: ' +
+                            '  <div id="gallery-slider"></div>' +
+                            '</div>',
+                    contentCSS: {
+                        width:'1000px'  // minimum width (max is 100%)
+                    },
+                    afterOpen: function($vexContent) {
+                        return
+                    },
+                    afterClose: function() {
+                        return console.log('galleryClose');
+                    }
+                });
+            }
+
             function showCustomizeModal(){
                 // once it works:
                 //var title = '<div>Build a Custom Map!</div>';
@@ -120,14 +138,18 @@
                 var donate_request = "I'm working on this, but a lot of my time is spent foraging for food. Support a bit and I'll put all that extra time into working more!";
 
                 window.modal = vex.open({
-                    content:'<div>' + title +
+                    content:'<div><h3>' + title + '</h3>' +
+                            'features:' +
+                            '<ul>' +
+                            '  <li>choose your pulsars (2401 to choose from!)</li>' +
+                            '</ul>' +
+                            'coming soon:' +
                             '<ul>' +
                             '  <li>customized date (use your birthday!)</li>' +
-                            '  <li>choose your pulsars (2401 to choose from!)</li>' +
                             '  <li>colorize using spectral data</li>' +
                             '</ul>' +
                             donate_request +
-                            '<table class="support-btns">' +
+                            '<table class="support-btns" alight="center">' +
                             '  <tr>' +
                             '    <td>' +
                             '      <div class="cb-tip-button" data-content-location="http://7yl4r.github.io/pulsarMap/" data-href="//www.coinbase.com/tip_buttons/show_tip" data-to-user-id="54bff2ae2a33eb943e00003e"></div>' +
@@ -136,8 +158,11 @@
                             '    </td>' +
                             '  </tr>' +
                             '</table>' +
+                            'See examples in <a href="#gallery" onclick="showGalleryModal()">the gallery</a>' +
                             '</div>',
-
+                    contentCSS: {
+                        width:'700px'  // minimum width (max is 100%)
+                    },
                     afterOpen: function($vexContent) {
                         // TODO: listen for payment callback(s)
                         //    vex.close(window.modal.data().vex.id);
@@ -153,7 +178,7 @@
                         return
                     },
                     afterClose: function() {
-                        return console.log('vexClose');
+                        return console.log('customizeClose');
                     }
                 });
             }
