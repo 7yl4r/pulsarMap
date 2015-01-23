@@ -60,11 +60,9 @@
         <div id='buttons'>
             <input type="radio" id="original" name="mapType" value="orig" onclick="drawMap('original')">
                <label for="original">Voyager/Pioneer Map</label>
+<!--
             <input type="radio" id="1989_map" name="mapType" value="1989" onclick="drawMap('1989')">
                <label for="1989_map">1989 (from modern data)</label>
-<!--
-            <input type="radio" id="7yl4r" name="mapType" value="my map" onclick="drawMap('7yl4r')">
-               <label for="7yl4r">7yl4r's custom map</label>
 -->
             <input type="radio" id="yours" name="mapType" value="your map" onclick="drawMap('custom')">
                <label for="yours">more pulsars</label>
@@ -121,8 +119,8 @@
                     content:'<div>' +
                             '  custom maps rendered: ' +
                             '  <div id="gallery-slider">' + //style="position: relative; top: 0px; left: 0px; width: 600px; height: 300px;">' +
-                            '    <img src="img/gallery/original-1989.png" alt="Original 14 pulsars recomputed with modern measurements on my birthday.">' +
-                            '    <img src="http://fc04.deviantart.net/fs71/f/2010/227/4/6/PNG_Test_by_Destron23.png" alt="this is just a test">' +
+                            '    <img src="img/gallery/original1989.png" alt="Original 14 pulsars recomputed with modern measurements on my birthday.">' +
+                            '    <img data-src="img/gallery/tooMany.png" alt="ALL THE PULSARS! ">' +
                             '  </div>' +
                             '</div>',
                     contentCSS: {
