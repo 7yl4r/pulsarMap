@@ -1,3 +1,6 @@
 [submodule "vex"]
 	path = vex
 	url = https://github.com/HubSpot/vex/
+[submodule "Ideal-Image-Slider"]
+	path = Ideal-Image-Slider
+	url = https://github.com/gilbitron/Ideal-Image-Slider
