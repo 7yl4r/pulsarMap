@@ -127,14 +127,11 @@
                         width:'1000px'  // minimum width (max is 100%)
                     },
                     afterOpen: function($vexContent) {
-                        console.log('gallery opened');
                         var gallery_slider = new IdealImageSlider.Slider({
                             selector: '#gallery-slider',
                             height: Math.floor(.80*window.innerHeight), // Required but can be set by CSS
                             interval: 4000
                         });
-                        console.log('gallery_slider:',gallery_slider);
-                        console.log('gallery-slider:', $('#gallery-slider'));
                         gallery_slider.addCaptions();
                         gallery_slider.start();
                         return
