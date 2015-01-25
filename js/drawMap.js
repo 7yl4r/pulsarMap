@@ -182,7 +182,7 @@ pulsarSet.prototype.loadPulsarDB = function(callback){
             pulsarData.luminocity1400MHz = [row][14];
             pulsarData.rotationalPeriod_1 = [row][15];
 
-            pulsarData.dist = Math.tan(pulsarData.galacticLatitude * Math.PI/180) * pulsarData.z;
+            pulsarData.dist = Math.tan(pulsarData.galacticLatitude * Math.PI/180) * pulsarData.z * KPC_TO_GCR;
             pulsarData.period = pulsarData.rotationalPeriod * S_TO_H_UNITS;
             pulsarData.z = pulsarData.heightAboveGalacticPlane * KPC_TO_GCR;
             pulsarData.angle = pulsarData.galacticLongitude;
