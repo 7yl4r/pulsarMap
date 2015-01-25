@@ -7,6 +7,8 @@
         <link rel='stylesheet' type='text/css' href='css/stylesheet.css'/>
         <link rel='stylesheet' type='text/css' href='css/radioButtons.css'/>
 
+        <link href="jquery-ui-1.11.2.custom/jquery-ui.min.css" rel="stylesheet">
+
         <link rel="stylesheet" href="vex/css/vex.css" />
         <link rel="stylesheet" href="vex/css/vex-theme-os.css" />
 
@@ -65,9 +67,9 @@
             <input type="radio" id="1989_map" name="mapType" value="1989" onclick="drawMap('1989')">
                <label for="1989_map">1989 (from modern data)</label>
 -->
-            <input type="radio" id="yours" name="mapType" value="your map" onclick="drawMap('custom')">
+            <input type="radio" id="yours" name="mapType" value="your map" onclick="drawMap('select_pulsars')">
                <label for="yours">more pulsars</label>
-            <input type="radio" id="custom" name="mapType" value="custom" onclick="showCustomizeModal()">
+            <input type="radio" id="custom" name="mapType" value="custom" onclick="selectCustomize()">
                <label for="custom">customize your own!</label>
 <!--
             <input type="radio" id="all" name="mapType" value="full map" onclick="drawMap('all')">
@@ -83,23 +85,41 @@
             contemplating your pulsar selection...
         </div>
         <br>
-        <div id='customize'>
+        <div id='select-pulsars-table'>
             Customize which pulsars are shown on the map by selecting them below:
             <div id='pulsar-selector'>
                 looking for pulsars...
             </div>
         </div>
+        <div id="customizer" style="min-height:400px;">
+            <div id="date-selector">
+                select the date for your map (MM/DD/YYYY):
+                <input type="text" id="datepicker">
+            </div>
+
+            <div id="selected-pulsars">
+                <label for="pulsar-lister">Pulsars Selected: (comma separated) </label>
+                <textarea id="pulsar-lister"></textarea>
+                or
+                <input type="checkbox" id="use-orig-pulsars-btn"><label for="use-orig-pulsars-btn">Use Original 14 Pulsars</label>
+            </div>
+
+            <button id="build-map-btn">Build my map!</button>
+        </div>
                 
         <!-- libraries -->
         <script src="https://code.jquery.com/jquery-2.1.3.min.js" type="text/javascript"></script>
         <script type='text/javascript' src='http://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js'></script>
-        <script type="text/javascript" src="https://code.jquery.com/ui/1.11.2/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="jquery-ui-1.11.2.custom/jquery-ui.min.js"></script>
         <script type="text/javascript" src="vex/js/vex.combined.min.js"></script>
         <script type="text/javascript" src="Ideal-Image-Slider/ideal-image-slider.js"></script>
         <script type="text/javascript" src="Ideal-Image-Slider/extensions/captions/iis-captions.js"></script>
         
         <!-- map maker -->
         <script type='text/javascript' src='js/drawMap.js'></script>
+
+        <!-- customizer -->
+        <script type="text/javascript" src="js/customizer.js"></script>
         
         <!-- g+ share button script -->
         <script type="text/javascript">
@@ -143,6 +163,25 @@
                 });
             }
 
+            window.rdy = false;
+            $( "#build-map-btn" ).button().click(function( event ) {
+                event.preventDefault();
+                if( window.rdy ){
+                    console.log('mapping...');
+                    alert("coming soon!");
+                } else {
+                    showCustomizeModal();
+                }
+            });
+
+            window.customizeModalShown = false;
+            function selectCustomize(){
+                drawMap('custom');
+                if (!window.customizeModalShown){
+                    showCustomizeModal();
+                }
+            }
+
             function showCustomizeModal(){
                 // once it works:
                 //var title = '<div>Build a Custom Map!</div>';
@@ -167,8 +206,8 @@
                             '<table class="support-btns" align="center">' +
                             '  <tr>' +
                             '    <td>' +
-                            '      <div class="cb-tip-button" data-content-location="http://7yl4r.github.io/pulsarMap/" data-href="//www.coinbase.com/tip_buttons/show_tip" data-to-user-id="54bff2ae2a33eb943e00003e"></div>' +
-                            '    </td><td>' +
+                            //'      <div class="cb-tip-button" data-content-location="http://7yl4r.github.io/pulsarMap/" data-href="//www.coinbase.com/tip_buttons/show_tip" data-to-user-id="54bff2ae2a33eb943e00003e"></div>' +
+                            //'    </td><td>' +
                             '      <a class="coinbase-button" data-code="9008ff3598afe70ecae382a7b5756754" data-button-style="donation_small" href="https://www.coinbase.com/checkouts/9008ff3598afe70ecae382a7b5756754">Donate Bitcoins</a>' +
                             '    </td>' +
                             '  </tr>' +
@@ -179,17 +218,29 @@
                         width:'700px'  // minimum width (max is 100%)
                     },
                     afterOpen: function($vexContent) {
-                        // TODO: listen for payment callback(s)
-                        //    vex.close(window.modal.data().vex.id);
-                            // TODO: open the customize form
-                         //   console.log('custom submit mode unlocked');
+                        window.customizeModalShown = true;
 
                         // set up coinbase tip button
-                        !function(d,s,id) {var js,cjs=d.getElementsByTagName(s)[0],e=d.getElementById(id);if(e){return;}js=d.createElement(s);js.id=id;js.src="https://www.coinbase.com/assets/tips.js";cjs.parentNode.insertBefore(js,cjs);}(document, 'script', 'coinbase-tips');
+                        //!function(d,s,id) {var js,cjs=d.getElementsByTagName(s)[0],e=d.getElementById(id);if(e){return;}js=d.createElement(s);js.id=id;js.src="https://www.coinbase.com/assets/tips.js";cjs.parentNode.insertBefore(js,cjs);}(document, 'script', 'coinbase-tips');
 
                         // set up coinbase donate button (from https://www.coinbase.com/assets/button.js)
                         (function(){var e;(e=function(e,t,n,a){var o,r,i,s,c,d,l,u,m,_;return _=[null,null,!1],i=_[0],r=_[1],d=_[2],(i=e.jQuery)&&(u=parseInt(n.split(".")[0])||0,m=parseInt(n.split(".")[1])||0,s=parseInt(i.fn.jquery.split(".")[0])||0,c=parseInt(i.fn.jquery.split(".")[1])||0,o=s>u||s===u&&c>=m),i&&o&&!a(i,d)?void 0:(l=t.createElement("script"),l.type="text/javascript",l.src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js",l.onload=l.onreadystatechange=function(){return d||(r=this.readyState)&&"loaded"!==r&&"complete"!==r?void 0:(a((i=e.jQuery).noConflict(1),d=!0),i(l).remove())},(t.getElementsByTagName("head")[0]||t.documentElement).appendChild(l))})(window,document,"1.7",function(e){var t,n,a,o,r,i,s;return t=!1,n=!1,r="https://www.coinbase.com",s=function(e){return"development"===e||"test"===e?r=document.location.protocol+"//"+document.location.host:void 0},i=function(a){var o,i,s;if(s=a.data.split("|"),i=s[0],o=s[1],o=escape(o),a.origin===r){if("show modal iframe"===i)return e("#coinbase_modal_iframe_"+o).show();if("coinbase_payment_complete"===i)return e("#coinbase_button_iframe_"+o).attr("src",r+"/buttons/paid"),e(document).trigger("coinbase_payment_complete",o);if("coinbase_payment_mispaid"===i)return e(document).trigger("coinbase_payment_mispaid",o);if("coinbase_payment_expired"===i)return e(document).trigger("coinbase_payment_expired",o);if("hide modal"===i)return e("#coinbase_modal_iframe_"+o).hide(),e(document).trigger("coinbase_modal_closed",o);if("signup redirect"===i)return document.location=r+"/users/verify";if("button frame loaded"===i){if(t=!0,n)return e(document).trigger("coinbase_button_loaded",o)}else if("checkouts frame loaded"===i&&(n=!0,t))return e(document).trigger("coinbase_button_loaded",o)}},o=function(e){switch(e){case"custom_large":return 276;case"custom_small":return 210;case"subscription_large":return 263;case"subscription_small":return 210;case"donation_large":return 189;case"donation_small":return 148;case"buy_now_large":return 211;case"buy_now_small":return 170;default:return 211}},a=function(e){switch(e){case"custom_large":return 62;case"custom_small":return 48;default:return 46}},window.addEventListener("message",i,!1),s(e("body").data("env")),e(".coinbase-button").each(function(){return function(n,i){var c,d,l,u,m,_,p,b;return c=e(i),u=c.data(),u.referrer=document.domain,p=e.param(u),l=c.data("code"),b=c.data("width")||o(c.data("button-style")),m=c.data("height")||a(c.data("button-style")),s(c.data("env")),d="<iframe src='"+r+"/buttons/"+l+"?"+p+"' id='coinbase_button_iframe_"+l+"' name='coinbase_button_iframe_"+l+"' style='width: "+b+"px; height: "+m+"px; border: none; overflow: hidden;' scrolling='no' allowtransparency='true' frameborder='0'></iframe>",_="<iframe src='"+r+"/checkouts/"+l+"/widget?"+p+"' id='coinbase_modal_iframe_"+l+"' name='coinbase_modal_iframe_"+l+"' style='background-color: transparent; border: 0px none transparent; display: none; position: fixed; visibility: visible; margin: 0px; padding: 0px; left: 0px; top: 0px; width: 100%; height: 100%; z-index: 9999;' scrolling='no' allowtransparency='true' frameborder='0'></iframe>","none"===c.data("button-style")?t=!0:c.replaceWith(d),e("body").append(_)}}(this)),e(document).on("coinbase_show_modal",function(t,n){return console.log("coinbase_show_modal"),e("#coinbase_modal_iframe_"+n).length>0?(e("#coinbase_modal_iframe_"+n).show(),frames["coinbase_modal_iframe_"+n].postMessage("show modal|"+n,r),console.log("1")):console.log("Could not find Coinbase modal with id 'coinbase_modal_iframe_"+n+"'. Does this match the data-code attribute in your embed HTML?")}),console.log("button.js",r),!1})}).call(this);
 
+                        // listen for payment callback(s)
+                        $(document).on('coinbase_payment_complete', function(event, code){
+                            console.log("Payment completed for button " + code);
+                            window.rdy = true;
+                            vex.close(window.modal.data().vex.id);
+                            alert("Thanks for your donation! Email me at murray.tylar+pulsarMap@gmail.com and I'll let you know when the program is ready!");
+                            //alert("pulsar customizer unlocked!");
+                        });
+                        $(document).on('coinbase_payment_mispaid', function(event, code) {
+                            console.log("Payment mispaid for button " + code);
+                        });
+
+                        $(document).on('coinbase_payment_expired', function(event, code) {
+                            console.log("Payment expired for button " + code);
+                        });
                         return
                     },
                     afterClose: function() {
