@@ -121,7 +121,7 @@ function pulsarSet( type ){
         $("#select-pulsars-table").show();
         $("#data").hide();
         this.list = [];
-        this.loadPulsarFile(function(){
+        this.loadPulsarTable(function(){
             PULSARS.makeDataTable();
             PULSARS.makePulsarOptionsTable();
         });
@@ -132,7 +132,7 @@ function pulsarSet( type ){
         $('#customizer').hide();
         $('#data').prepend('Loading alotta data... Hold on to your butts.<br><br>')
         $('#data').show();
-        this.loadPulsarFile(function(){
+        this.loadPulsarTable(function(){
             PULSARS.makeDataTable();
             PULSARS.list = PULSARS.allPulsars;
         });
@@ -159,8 +159,47 @@ pulsarSet.prototype.makeDataTable = function(){
     html += TABLE_FOOT;
     dataTable.innerHTML = html;
 };
-pulsarSet.prototype.loadPulsarFile = function(callback){
+pulsarSet.prototype.loadPulsarDB = function(callback){
+  // loads up pulsar database
+    var allList = [];  // store this for access inside callback
+    $.get('pulsarDB.csv', function(dat) {
+        var data = $.csv.toArrays(dat);
+        for(var row in data) {
+            var pulsarData = {};
+            pulsarData.name = data[row][1];
+            pulsarData.jname = data[row][2];
+            pulsarData.positionEpoch = [row][3];
+            pulsarData.galacticLongitude = [row][4];
+            pulsarData.galacticLatitude = [row][5];  // < off galactic plane, used primarily to calculate distance w/ z
+            pulsarData.galacticLongitude_1 = [row][6];  // 1st deriv
+            pulsarData.galacticLatitude_1 = [row][7];   // 1st deriv
+            pulsarData.rotationalPeriod = [row][8];
+            // col 9 (P1) is redundant if last col available (and it is for all currently)
+            pulsarData.periodEpoch = [row][10];
+            pulsarData.spectralIndex = [row][11];
+            pulsarData.heightAboveGalacticPlane = [row][12];  // height above galactic plane
+            pulsarData.luminocity400MHz = [row][13];
+            pulsarData.luminocity1400MHz = [row][14];
+            pulsarData.rotationalPeriod_1 = [row][15];
+
+            pulsarData.dist = Math.tan(pulsarData.galacticLatitude * Math.PI/180) * pulsarData.z;
+            pulsarData.period = pulsarData.rotationalPeriod * S_TO_H_UNITS;
+            pulsarData.z = pulsarData.heightAboveGalacticPlane * KPC_TO_GCR;
+            pulsarData.angle = pulsarData.galacticLongitude;
+            if (row == 0) {
+                allList = [ new Pulsar (pulsarData)];
+            } else {
+                allList.push( new Pulsar (pulsarData));
+            }
+        }
+        // NOTE: had to reference this as a global because the ajax call
+        PULSARS.allPulsars = allList;
+        callback();
+    });
+};
+pulsarSet.prototype.loadPulsarTable = function(callback){
     // loads up the pulsar list file and then runs callback
+    // NOTE: DEPRECIATED; use the newer, better, loadPulsarDB() instead
     if (this.allPulsars){
         callback();
         return;
@@ -235,12 +274,23 @@ pulsarSet.prototype.drawPulsars = function(ctx){
 }
 
 // pulsar "class"
-function Pulsar(name, dist, z, angle, period){
-  this.name = name;
-  this.dist = dist;  // distance from galactic center on galactic plane, in units of Earth-galactic center distance
-  this.z    = z;  // height above/below galactic plane
-  this.angle= angle;  // angle on galactic plane from galactic center
-  this.period=period;  // rotational period (in H-transition units)
+function Pulsar(nameOrObj, dist, z, angle, period){
+    // 1st arg can now be parameter object
+    if (nameOrObj.name){  // object is given for the first arg
+        if (nameOrObj.dist && nameOrObj.z && nameOrObj.angle && nameOrObj.period) {
+            for (var propertyName in nameOrObj) {
+                this[propertyName] = nameOrObj[propertyName]
+            }
+        } else {
+            throw Error('required parameters missing to initiate pulsar:', nameOrObj);
+        }
+    } else {
+        this.name = nameOrObj;
+        this.dist = dist;  // distance from galactic center on galactic plane, in units of Earth-galactic center distance
+        this.z = z;  // height above/below galactic plane
+        this.angle = angle;  // angle on galactic plane from galactic center
+        this.period = period;  // rotational period (in H-transition units)
+    }
 }
 Pulsar.prototype.drawLine = function(ctx){
   ctx.moveTo(EARTH.x, EARTH.y);
