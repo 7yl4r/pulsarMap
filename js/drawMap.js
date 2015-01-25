@@ -35,15 +35,12 @@ var Y_SHIFT = -2;  //amount to move up before drawing text
 var X_SHIFT = 5;  // amount to move right before drawing text
 context.textAlign = 'left';
 
-function drawMap(type){
-    // select correct pulsar info
-    PULSARS = new pulsarSet( type );
-        
+function drawMapBG(){
     // Use the identity matrix to reset transforms
     context.setTransform(1, 0, 0, 1, 0, 0);
     // clear the canvas
     context.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     context.beginPath();
     context.arc(EARTH.x, EARTH.y, EARTH.r, 0, 2*Math.PI);
     context.closePath();
@@ -55,9 +52,13 @@ function drawMap(type){
     context.translate(GALACTIC_CENTER.x, GALACTIC_CENTER.y);
     context.fillText('|', -3, LINE_HEIGHT / 2 + Y_SHIFT );
     context.restore();
-    
-    PULSARS.drawPulsars(context);
+}
 
+function drawMap(type){
+    // select correct pulsar info
+    PULSARS = new pulsarSet( type );
+    drawMapBG();
+    PULSARS.drawPulsars(context);
 }
 
 function polar2cartesian(deg, r) {
@@ -291,7 +292,9 @@ pulsarSet.prototype.addPulsar = function( pulsar_obj ){
 pulsarSet.prototype.removePulsar = function( pulsar_name){
     // removes a pulsar object from the list and updates the map
     var ind = this.getIndex(pulsar_name);
-    delete this.list[ind];
+    this.list.pop(ind);
+    drawMapBG();
+    PULSARS.drawPulsars(context);
 }
 pulsarSet.prototype.drawPulsars = function(ctx){
     // draws pulsar lines, z coords and binary 
