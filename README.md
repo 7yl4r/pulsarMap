@@ -3,6 +3,8 @@ pulsarMap
 
 a little app for making an updated version of the interstellar pulsar map included on the pioneer plaque and the voyager golden record.
 
+Read more about it [here](http://rsimulate.com/2014/10/25/interstellar-pulsar-mapping-in-javascript/).
+
 The "custom" pulsar database included is from the ATNF Pulsar Catalogue, so thanks to all that awesome work. Read more in the article Manchester, R. N., Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (astro-ph/0412641), which gives a full description of the catalogue, or visit http://www.atnf.csiro.au/research/pulsar/psrcat.
 
 The query used was:
