@@ -8,6 +8,7 @@ Herein lies a guide for queries of the ATNF Pulsar Catalogue to update this repo
 5. delete the header & footer of the table (don't forget what those cols mean)
 7. find-replace any empty fields (* by default) with whatever you want
 6. save & use your fancy new .csv file
+7. can also convert to html (use online converter)
 
 # useful conditions and notes
 * (Dist < 7.6) = distance less than 1 A*_dist

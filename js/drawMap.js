@@ -143,6 +143,7 @@ function pulsarSet( type ){
         $('#customizer').show();
         this.list = [];
         // TODO: save this custom list somewhere and then load it into this.list (so we can come back)
+        this.loadPulsarDB();
 
     } else {
         console.log('unknown pulsar set "'+type.toString()+'". empty pulsar set created.');
@@ -168,24 +169,32 @@ pulsarSet.prototype.loadPulsarDB = function(callback){
             var pulsarData = {};
             pulsarData.name = data[row][1];
             pulsarData.jname = data[row][2];
-            pulsarData.positionEpoch = [row][3];
-            pulsarData.galacticLongitude = [row][4];
-            pulsarData.galacticLatitude = [row][5];  // < off galactic plane, used primarily to calculate distance w/ z
-            pulsarData.galacticLongitude_1 = [row][6];  // 1st deriv
-            pulsarData.galacticLatitude_1 = [row][7];   // 1st deriv
-            pulsarData.rotationalPeriod = [row][8];
+            pulsarData.positionEpoch = data[row][3];
+            pulsarData.galacticLongitude = data[row][4];
+            pulsarData.galacticLatitude = data[row][5];  // < off galactic plane, used primarily to calculate distance w/ z
+            pulsarData.galacticLongitude_1 = data[row][6];  // 1st deriv
+            pulsarData.galacticLatitude_1 = data[row][7];   // 1st deriv
+            pulsarData.rotationalPeriod = data[row][8];
             // col 9 (P1) is redundant if last col available (and it is for all currently)
-            pulsarData.periodEpoch = [row][10];
-            pulsarData.spectralIndex = [row][11];
-            pulsarData.heightAboveGalacticPlane = [row][12];  // height above galactic plane
-            pulsarData.luminocity400MHz = [row][13];
-            pulsarData.luminocity1400MHz = [row][14];
-            pulsarData.rotationalPeriod_1 = [row][15];
+            pulsarData.periodEpoch = data[row][10];
+            pulsarData.spectralIndex = data[row][11];
+            pulsarData.heightAboveGalacticPlane = data[row][12];  // height above galactic plane
+            pulsarData.luminocity400MHz = data[row][13];
+            pulsarData.luminocity1400MHz = data[row][14];
+            pulsarData.rotationalPeriod_1 = data[row][15];
 
-            pulsarData.dist = Math.tan(pulsarData.galacticLatitude * Math.PI/180) * pulsarData.z * KPC_TO_GCR;
+            pulsarData.distance = 0.5;  // TODO: update db to include this!
+
+            // properties for display:
+            pulsarData.angle = pulsarData.galacticLongitude;
             pulsarData.period = pulsarData.rotationalPeriod * S_TO_H_UNITS;
             pulsarData.z = pulsarData.heightAboveGalacticPlane * KPC_TO_GCR;
-            pulsarData.angle = pulsarData.galacticLongitude;
+            if (pulsarData.z == 0){
+                pulsarData.dist = pulsarData.distance;
+            } else {
+                pulsarData.dist = Math.tan(pulsarData.galacticLatitude * Math.PI / 180) * pulsarData.z * KPC_TO_GCR;
+            }
+
             if (row == 0) {
                 allList = [ new Pulsar (pulsarData)];
             } else {
@@ -194,7 +203,6 @@ pulsarSet.prototype.loadPulsarDB = function(callback){
         }
         // NOTE: had to reference this as a global because the ajax call
         PULSARS.allPulsars = allList;
-        callback();
     });
 };
 pulsarSet.prototype.loadPulsarTable = function(callback){
@@ -247,7 +255,16 @@ pulsarSet.prototype.togglePulsar = function( ind ){
         console.log('adding pulsar "'+this.allPulsars[ind].name+'" to set.');
         this.addPulsar(this.allPulsars[ind]);
     }
-};
+}
+pulsarSet.prototype.getIndex = function(pulsar_name){
+    // returns index of pulsar if found, else false
+    for (index = 0; index < this.list.length; ++index) {
+        if (this.list[index].name == pulsar_name){
+            return index;
+        }
+    } // else
+    return false;
+}
 pulsarSet.prototype.isInSet = function( pulsar_name ){
     // returns true if given pulsar is already in the set
     for (index = 0; index < this.list.length; ++index) {
@@ -257,6 +274,15 @@ pulsarSet.prototype.isInSet = function( pulsar_name ){
     } // else
     return false;
 };
+pulsarSet.prototype.getPulsar = function (pulsar_name){
+    // returns pulsar object for given name else throws err
+    for (index = 0; index < this.list.length; ++index) {
+        if (this.list[index].name == pulsar_name){
+            return this.list[index];
+        }
+    } // else
+    throw Error('no pulsar of that name found:' + pulsar_name);
+}
 pulsarSet.prototype.addPulsar = function( pulsar_obj ){
     // adds the pulsar object and updates the map
     this.list.push(pulsar_obj);
@@ -264,7 +290,8 @@ pulsarSet.prototype.addPulsar = function( pulsar_obj ){
 };
 pulsarSet.prototype.removePulsar = function( pulsar_name){
     // removes a pulsar object from the list and updates the map
-    console.log("TODO: remove pulsar");
+    var ind = this.getIndex(pulsar_name);
+    delete this.list[ind];
 }
 pulsarSet.prototype.drawPulsars = function(ctx){
     // draws pulsar lines, z coords and binary 
@@ -277,12 +304,13 @@ pulsarSet.prototype.drawPulsars = function(ctx){
 function Pulsar(nameOrObj, dist, z, angle, period){
     // 1st arg can now be parameter object
     if (nameOrObj.name){  // object is given for the first arg
-        if (nameOrObj.dist && nameOrObj.z && nameOrObj.angle && nameOrObj.period) {
+        if (nameOrObj.dist!=undefined && nameOrObj.z!=undefined && nameOrObj.angle!=undefined && nameOrObj.period!=undefined) {
             for (var propertyName in nameOrObj) {
                 this[propertyName] = nameOrObj[propertyName]
             }
         } else {
-            throw Error('required parameters missing to initiate pulsar:', nameOrObj);
+            console.log('ERR: MISSING PARAMS IN OBJ: ', nameOrObj)
+            throw Error('required parameters missing to initiate pulsar');
         }
     } else {
         this.name = nameOrObj;
