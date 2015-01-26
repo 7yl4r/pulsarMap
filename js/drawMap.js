@@ -161,7 +161,7 @@ pulsarSet.prototype.makeDataTable = function(){
     html += TABLE_FOOT;
     dataTable.innerHTML = html;
 };
-pulsarSet.prototype.loadPulsarDB = function(callback){
+pulsarSet.prototype.loadPulsarDB = function(){
   // loads up pulsar database
     var allList = [];  // store this for access inside callback
     $.get('pulsarDB.csv', function(dat) {
@@ -176,15 +176,13 @@ pulsarSet.prototype.loadPulsarDB = function(callback){
             pulsarData.galacticLongitude_1 = data[row][6];  // 1st deriv
             pulsarData.galacticLatitude_1 = data[row][7];   // 1st deriv
             pulsarData.rotationalPeriod = data[row][8];
-            // col 9 (P1) is redundant if last col available (and it is for all currently)
-            pulsarData.periodEpoch = data[row][10];
-            pulsarData.spectralIndex = data[row][11];
+            pulsarData.periodEpoch = data[row][9];
+            pulsarData.spectralIndex = data[row][10];
+            pulsarData.distance = data[row][11];
             pulsarData.heightAboveGalacticPlane = data[row][12];  // height above galactic plane
             pulsarData.luminocity400MHz = data[row][13];
             pulsarData.luminocity1400MHz = data[row][14];
             pulsarData.rotationalPeriod_1 = data[row][15];
-
-            pulsarData.distance = 0.5;  // TODO: update db to include this!
 
             // properties for display:
             pulsarData.angle = pulsarData.galacticLongitude;
@@ -193,7 +191,7 @@ pulsarSet.prototype.loadPulsarDB = function(callback){
             if (pulsarData.z == 0){
                 pulsarData.dist = pulsarData.distance;
             } else {
-                pulsarData.dist = Math.tan(pulsarData.galacticLatitude * Math.PI / 180) * pulsarData.z * KPC_TO_GCR;
+                pulsarData.dist = pulsarData.z / Math.tan(pulsarData.galacticLatitude * Math.PI / 180);
             }
 
             if (row == 0) {
