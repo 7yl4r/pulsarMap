@@ -189,7 +189,7 @@ pulsarSet.prototype.loadPulsarDB = function(){
             pulsarData.period = pulsarData.rotationalPeriod * S_TO_H_UNITS;
             pulsarData.z = pulsarData.heightAboveGalacticPlane * KPC_TO_GCR;
             if (pulsarData.z == 0){
-                pulsarData.dist = pulsarData.distance;
+                pulsarData.dist = pulsarData.distance * KPC_TO_GCR
             } else {
                 pulsarData.dist = pulsarData.z / Math.tan(pulsarData.galacticLatitude * Math.PI / 180);
             }
