@@ -52,7 +52,7 @@ $(function() {
                 }
             }
         } else { // pulsar already in list
-            PULSARS.removePulsar(ind);
+            PULSARS.removePulsar(pulsarName);
         }
 
         // visual effect
