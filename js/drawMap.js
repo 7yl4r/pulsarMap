@@ -260,6 +260,8 @@ pulsarSet.prototype.getIndex = function(pulsar_name){
     for (index = 0; index < this.list.length; ++index) {
         if (this.list[index].name == pulsar_name){
             return index;
+        } else if( this.list[index].jname == pulsar_name){
+            return index;
         }
     } // else
     return false;
@@ -290,7 +292,7 @@ pulsarSet.prototype.addPulsar = function( pulsar_obj ){
 pulsarSet.prototype.removePulsar = function( pulsar_name){
     // removes a pulsar object from the list and updates the map
     var ind = this.getIndex(pulsar_name);
-    this.list.pop(ind);
+    this.list.splice(ind, 1);
     drawMapBG();
     PULSARS.drawPulsars(context);
 }
