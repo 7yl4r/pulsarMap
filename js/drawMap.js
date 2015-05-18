@@ -79,8 +79,7 @@ var drawLine = function(ctx, dist, dir){
 function pulsarSet( type ){
     if (type == 'voyager' || type == 'pioneer' || type == 'original'){
         console.log('original voyager/pioneer pulsar set selected');
-        $('#select-pulsars-table').hide();
-        $('#customizer').hide();
+        $('.gui-toggler').hide();
         $('#data').show();
         this.list =[new Pulsar('J1731-4744', .27, 0, 17,   1178486506),
                       new Pulsar('J1456-6843', .02, 0, -49,  374101871),
@@ -99,8 +98,7 @@ function pulsarSet( type ){
         this.makeDataTable();
     } else if (type == 'original-1989' || type == '1989'){
         console.log('original voyager/pioneer set with updated values for June 1989 selected');
-        $('#select-pulsars-table').hide();
-        $('#customizer').hide();
+        $('.gui-toggler').hide();
         $('#data').show();
         this.list =[new Pulsar('J1731-4744', 0.6539219551,  0, 18.15548387,   1178693580),
                       new Pulsar('J1456-6843', 0.0590855341,  0, -47.68774194,  374101942.8),
@@ -129,8 +127,7 @@ function pulsarSet( type ){
     } else if (type == 'all'){
         // shows all known pulsars in the db (hold on to your butts)
         console.log('using all pulsars in the set... Hold on to your butts.');
-        $('#select-pulsars-table').hide();
-        $('#customizer').hide();
+        $('.gui-toggler').hide();
         $('#data').prepend('Loading alotta data... Hold on to your butts.<br><br>')
         $('#data').show();
         this.loadPulsarTable(function(){
@@ -139,12 +136,17 @@ function pulsarSet( type ){
         });
         
     } else if ( type == 'custom' ) {
-        $('#select-pulsars-table').hide();
-        $("#data").hide();
+        $('.gui-toggler').hide();
         $('#customizer').show();
         this.list = [];
         // TODO: save this custom list somewhere and then load it into this.list (so we can come back)
         this.loadPulsarDB();
+
+    } else if (type == 'manual-entry') {
+        $('.gui-toggler').hide();
+        $('#manual-entry').show()
+        $('#data').show()
+        this.list = [];
 
     } else {
         console.log('unknown pulsar set "'+type.toString()+'". empty pulsar set created.');

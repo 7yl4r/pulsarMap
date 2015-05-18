@@ -71,6 +71,8 @@
                <label for="yours">more pulsars</label>
             <input type="radio" id="custom" name="mapType" value="custom" onclick="selectCustomize()">
                <label for="custom">customize your own!</label>
+            <input type="radio" id="manual" name="mapType" value="manual-map" onclick="drawMap('manual-entry')">
+                <label for="manual">enter values manually</label>
 <!--
             <input type="radio" id="all" name="mapType" value="full map" onclick="drawMap('all')">
                <label for="all">MOAR PULSARS!!!</label>
@@ -80,18 +82,44 @@
         <canvas id="pulsar_map" width="1200" height="800">
             Your browser does not support HTML5 Canvas? =(
         </canvas>
-        <br>
-        <div id='data'>
+
+        <!-- manual data entry section -->
+        <div id ="manual-entry" class="gui-toggler">
+            <input type="text" id="pulsar-name">
+                <label for="pulsar-name">name</label>
+
+            <input type="number" id="distance">
+                <label for="distance">distance [ratio of A* distance] </label>
+
+            <input type="number" id="z-coord">
+                <label for="z-coord">z-coord [ratio of A* distance]</label>
+
+            <input type="number" id="angle">
+                <label for="angle">degrees from A*</label>
+
+            <input type="number" id="period">
+                <label for="period">period [H-transitions]</label>
+
+            <input type="button" onclick="PULSARS.addPulsar(new Pulsar(
+                $('#pulsar-name').val(),
+                $('#distance').val(),
+                $('#z-coord').val(),
+                $('#angle').val(),
+                $('#period').val()));" value='add'>
+        </div>
+
+        <!-- selected data section -->
+        <div id='data' class="gui-toggler">
             contemplating your pulsar selection...
         </div>
         <br>
-        <div id='select-pulsars-table'>
+        <div id='select-pulsars-table' class="gui-toggler">
             Customize which pulsars are shown on the map by selecting them below:
             <div id='pulsar-selector'>
                 looking for pulsars...
             </div>
         </div>
-        <div id="customizer" style="min-height:400px;">
+        <div id="customizer" class="gui-toggler" style="min-height:400px;">
             <div id="date-selector">
                 The preview above shows your map using default dates. Set pulsars and date, then <button id="build-map-btn">Build Your map!</button>
                 <br>
