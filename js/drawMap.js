@@ -144,9 +144,9 @@ function pulsarSet( type ){
 
     } else if (type == 'manual-entry') {
         $('.gui-toggler').hide();
-        $('#manual-entry').show()
-        $('#data').show()
+        $('#manually-entered-pulsars').html('')  // clears any previously entered (and then abandoned) manual entries
         this.list = [];
+        $('#manual-entry').show()
 
     } else {
         console.log('unknown pulsar set "'+type.toString()+'". empty pulsar set created.');

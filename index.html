@@ -88,24 +88,35 @@
             <input type="text" id="pulsar-name">
                 <label for="pulsar-name">name</label>
 
+            <br>
             <input type="number" id="distance">
                 <label for="distance">distance [ratio of A* distance] </label>
 
+            <br>
             <input type="number" id="z-coord">
                 <label for="z-coord">z-coord [ratio of A* distance]</label>
 
+            <br>
             <input type="number" id="angle">
                 <label for="angle">degrees from A*</label>
 
+            <br>
             <input type="number" id="period">
                 <label for="period">period [H-transitions]</label>
 
+            <br>
             <input type="button" onclick="PULSARS.addPulsar(new Pulsar(
                 $('#pulsar-name').val(),
-                $('#distance').val(),
-                $('#z-coord').val(),
-                $('#angle').val(),
-                $('#period').val()));" value='add'>
+                parseFloat($('#distance').val()),
+                parseFloat($('#z-coord').val()),
+                parseFloat($('#angle').val()),
+                parseFloat($('#period').val())));
+                $('#manually-entered-pulsars').append($('#pulsar-name').val()+' <br>');" value='add'>
+
+            <br>
+
+            pulsars on your map:
+            <div id="manually-entered-pulsars"></div>
         </div>
 
         <!-- selected data section -->
