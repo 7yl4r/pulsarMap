@@ -30,11 +30,13 @@ context.strokeStyle = "black";
 context.lineWidth = 0.2 * canvas.width / 1200;  // .2 for 1200px
 
 var fontSize = parseInt(canvas.width / 120);  // 10 for 1200px
-context.font="bold " + fontSize + "px Courier";
+context.font="" + fontSize + "px Asset";
 var LINE_HEIGHT = fontSize;  // height of a text line
 var Y_SHIFT = -parseInt(canvas.width/600);  //amount to move up before drawing text  (-2 for 1200px)
 var X_SHIFT = parseInt(canvas.width / 240);  // amount to move right before drawing text  (5 for 1200px)
 context.textAlign = 'left';
+
+$("#pulsar_map").resizable();
 
 function drawMapBG(){
     // Use the identity matrix to reset transforms
