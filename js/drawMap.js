@@ -27,12 +27,13 @@ document.getElementById('original').checked = true;  // because drawMap ('origin
 context.fillStyle = "black";
 
 context.strokeStyle = "black";
-context.lineWidth = 0.2;
+context.lineWidth = 0.2 * canvas.width / 1200;  // .2 for 1200px
 
-context.font="10px Courier";
-var LINE_HEIGHT = 10;  // height of a text line
-var Y_SHIFT = -2;  //amount to move up before drawing text
-var X_SHIFT = 5;  // amount to move right before drawing text
+var fontSize = parseInt(canvas.width / 120);  // 10 for 1200px
+context.font="bold " + fontSize + "px Courier";
+var LINE_HEIGHT = fontSize;  // height of a text line
+var Y_SHIFT = -parseInt(canvas.width/600);  //amount to move up before drawing text  (-2 for 1200px)
+var X_SHIFT = parseInt(canvas.width / 240);  // amount to move right before drawing text  (5 for 1200px)
 context.textAlign = 'left';
 
 function drawMapBG(){
@@ -57,6 +58,11 @@ function drawMapBG(){
 function drawMap(type){
     // select correct pulsar info
     PULSARS = new pulsarSet( type );
+    drawMapBG();
+    PULSARS.drawPulsars(context);
+}
+
+function redrawMap(){
     drawMapBG();
     PULSARS.drawPulsars(context);
 }
