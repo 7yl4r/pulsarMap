@@ -395,3 +395,24 @@ Pulsar.prototype.draw = function( ctx ){
     this.drawPeriod(ctx);
     // TODO: draw z-axis marker
 };
+
+function zoomIn() {
+
+  GALACTIC_CENTER.dist *= 1.5;
+  EARTH.x = GALACTIC_CENTER.x - GALACTIC_CENTER.dist;
+
+  for (var i = 0; i < PULSARS.list.length; i++){
+    PULSARS.list[i].setCoords();
+  }
+  redrawMap();
+};
+
+function zoomOut() {
+  GALACTIC_CENTER.dist *= .5;
+  EARTH.x = GALACTIC_CENTER.x - GALACTIC_CENTER.dist;
+
+  for (var i = 0; i < PULSARS.list.length; i++){
+    PULSARS.list[i].setCoords();
+  }
+  redrawMap();
+};
