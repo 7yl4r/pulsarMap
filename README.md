@@ -3,7 +3,7 @@ pulsarMap
 
 A little app for making an updated version of the interstellar pulsar map included on the pioneer plaque and the voyager golden record.
 
-![img](http://imgur.com/lmJqpWt)
+![img](http://i.imgur.com/lmJqpWt.png)
 
 Read more about it [here](http://rsimulate.com/2014/10/25/interstellar-pulsar-mapping-in-javascript/).
 
