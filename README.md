@@ -1,7 +1,7 @@
 pulsarMap
 =========
 
-A little app for making an updated version of the interstellar pulsar map included on the pioneer plaque and the voyager golden record.
+A little app for making an updated version of the interstellar pulsar map included on the pioneer plaque and the voyager golden record, along with custom pulsar maps in the same style.
 
 ![img](http://i.imgur.com/lmJqpWt.png)
 
