@@ -5,7 +5,7 @@ A little app for making an updated version of the interstellar pulsar map includ
 
 ![img](http://i.imgur.com/lmJqpWt.png)
 
-Read more about it [here](http://rsimulate.com/2014/10/25/interstellar-pulsar-mapping-in-javascript/).
+Read more about it [here](http://7ych.blogspot.com/2018/02/interstellar-pulsar-mapping-in.html).
 
 Looking for the src? See the gh-pages branch!
 
