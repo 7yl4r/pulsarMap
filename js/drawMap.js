@@ -5,12 +5,12 @@ var pulsarSelectTable = document.getElementById('pulsar-selector');
 
 var context = canvas.getContext("2d");
 
-var PAD = 50; // padding between canvas edge and drawing                
+var PAD = 50; // padding between canvas edge and drawing
 
 var GALACTIC_CENTER ={};
 GALACTIC_CENTER.x = canvas.width-PAD;
 GALACTIC_CENTER.y = canvas.height/2;
-GALACTIC_CENTER.dist = GALACTIC_CENTER.x * 2/3;  // TODO: determine this dynamically using pulsar distances
+GALACTIC_CENTER.dist = GALACTIC_CENTER.x *2/3;  // TODO: determine this dynamically using pulsar distances
 
 KPC_TO_GCR = 1/7.611;  // conversion from kiloparsecs to galactic-center ratio units
 S_TO_H_UNITS = 1420405752;  // conversion from seconds to Hydrogen spin-flip transition times
