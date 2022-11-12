@@ -5,7 +5,7 @@ var pulsarSelectTable = document.getElementById('pulsar-selector');
 
 var context = canvas.getContext("2d");
 
-var PAD = 50; // padding between canvas edge and drawing
+var PAD = 50; // padding between canvas edge and drawing                
 
 var GALACTIC_CENTER ={};
 GALACTIC_CENTER.x = canvas.width-PAD;
@@ -89,7 +89,7 @@ function pulsarSet( type ){
         console.log('original voyager/pioneer pulsar set selected');
         $('.gui-toggler').hide();
         $('#data').show();
-        this.list =[new Pulsar('J1731-4744', .27, 0, 17,   1178693579.73006870048),
+        /*this.list =[new Pulsar('J1731-4744', .27, 0, 17,   1178693579.73006870048),
                       new Pulsar('J1456-6843', .02, 0, -49,  374102073.9049988297136),
                       new Pulsar('J1243-6423', .56, 0, 58,   551806509.1136371772952),
                       new Pulsar('J0835-4510', .15, 0, 95,  126882551.904960258048),
@@ -122,8 +122,8 @@ function pulsarSet( type ){
                       new Pulsar('J1935+1616', 0.5974247799,  0, -52.27290323,  509554102),
                       new Pulsar('J1932+1059', 0.04727368283, 0, 46.4516129,   321746951.7),
                       new Pulsar('J1645-0317', 0.3820785705,  0, -23.78064516,  550676677)];
-        this.makeDataTable();
-    } else if (type =='select_pulsars'){
+        this.makeDataTable(); 
+    } */ if (type =='select_pulsars'){
         $('#customizer').hide();
         $("#select-pulsars-table").show();
         $("#data").hide();
